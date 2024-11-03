@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - uploads:/app/uploads:rw
+      - persistent:/app/persistent:ro
+    environment:
+      - FLASK_ENV=development
+    restart: always
+
+volumes:
+  uploads:
+    driver_opts:
+      type: "tmpfs"
+      device: "tmpfs"
+      o: "size=10G"
+  persistent:
+    driver: local

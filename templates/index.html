@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Temporary File Upload</title>
+</head>
+<body>
+    <h1>Upload a File</h1>
+    <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+    
+    <h2>Temporary Files</h2>
+    <ul>
+        {% for file in uploaded_files %}
+        <li><a href="{{ url_for('download_upload', filename=file[0]) }}">{{ file[0] }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Persistent Files</h2>
+    <ul>
+        {% for file in persistent_files %}
+        <li><a href="{{ url_for('download_persistent', filename=file) }}">{{ file }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
